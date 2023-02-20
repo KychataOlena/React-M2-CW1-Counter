@@ -1,42 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Controls from './Controls';
 import './Counter.css';
 
-class Counter extends React.Component {
-  static defaultProps = {
-    initialValue: 0,
+export default function Counter() {
+  const [value, setValue] = useState(0);
+
+  const hendleIncrement = () => {
+    setValue(prevState => prevState + 1);
   };
 
-  state = {
-    value: this.props.initialValue,
+  const hendleDecrement = () => {
+    setValue(prevState => prevState - 1);
   };
-
-  hendleIncrement = () => {
-    // this.setState({
-    //   value: 15,
-    // });
-
-    this.setState(prevState => ({
-      value: prevState.value + 1,
-    }));
-  };
-
-  hendleDecrement = () => {
-    this.setState(prevState => ({
-      value: prevState.value - 1,
-    }));
-  };
-  render() {
-    return (
-      <div className="Counter">
-        <span className="Counter__value">{this.state.value}</span>
-        <Controls
-          onIncrement={this.hendleIncrement}
-          onDecrement={this.hendleDecrement}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="Counter">
+      <span className="Counter__value">{value}</span>
+      <Controls onIncrement={hendleIncrement} onDecrement={hendleDecrement} />
+    </div>
+  );
 }
 
-export default Counter;
+// class OldCounter extends React.Component {
+//   static defaultProps = {
+//     initialValue: 0,
+//   };
+
+//   state = {
+//     value: this.props.initialValue,
+//   };
+
+//   hendleIncrement = () => {
+//     // this.setState({
+//     //   value: 15,
+//     // });
+
+//     this.setState(prevState => ({
+//       value: prevState.value + 1,
+//     }));
+//   };
+
+//   hendleDecrement = () => {
+//     this.setState(prevState => ({
+//       value: prevState.value - 1,
+//     }));
+//   };
+//   render() {}
+// }
+
+// export  Counter;
